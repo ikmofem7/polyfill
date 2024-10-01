@@ -16,7 +16,7 @@
       </div>
       <div>
         <ul>
-          <li>Item 1</li>
+          <li id="target">Item 1</li>
           <li>Item 2</li>
           <li>Item 3</li>
         </ul>
@@ -42,6 +42,47 @@
       const htmlElement = document.getElementById("container");
       const height = calculateDOMTreeHeight(htmlElement);
       console.log(`The height of the DOM tree is ${height}`);
+
+      function getTags(rootElement, tags = new Set()) {
+        tags.add(rootElement.tagName.toLowerCase());
+        if (rootElement.childElementCount) {
+          for (const elem of rootElement.children) {
+            getTags(elem, tags);
+          }
+        }
+        return [...tags];
+      }
+
+      const tags = getTags(htmlElement);
+      console.log("Tags:", tags);
+
+      function findNextRightSibling(root, target) {
+        let queue = [root];
+        while (queue.length) {
+          let current = queue.shift();
+          if (current === target) {
+            return queue.length ? queue.shift() : null;
+          }
+          if (current.childElementCount) {
+            queue.push(...current.children);
+          }
+        }
+
+        // If target not found or no next right sibling, return null
+        return null;
+      }
+
+      // Example usage
+      const rootElement = document.getElementById("container");
+      const targetElement = document.getElementById("target");
+
+      const nextSibling = findNextRightSibling(rootElement, targetElement);
+
+      if (nextSibling) {
+        console.log("Next right sibling:", nextSibling);
+      } else {
+        console.log("No next right sibling found.");
+      }
     </script>
   </body>
 </html>
