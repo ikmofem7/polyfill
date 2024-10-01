@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DOM Tree Height Calculation</title>
+  </head>
+  <body>
+    <div id="container">
+      <h1>Title</h1>
+      <div>
+        <p>Paragraph 1</p>
+        <p>Paragraph 2</p>
+        <div>
+          <span>Span 1</span>
+          <span>Span 2</span>
+        </div>
+      </div>
+      <div>
+        <ul>
+          <li>Item 1</li>
+          <li>Item 2</li>
+          <li>Item 3</li>
+        </ul>
+      </div>
+    </div>
+    <script>
+      function calculateDOMTreeHeight(rootElement) {
+        if (
+          !rootElement ||
+          !rootElement.children ||
+          !rootElement.children.length
+        )
+          return 0;
+
+        let maxheight = 0;
+        for (let i = 0; i < rootElement.children.length; i++) {
+          const height = calculateDOMTreeHeight(rootElement.children[i]);
+          maxheight = Math.max(height, maxheight);
+        }
+        return 1 + maxheight;
+      }
+
+      const htmlElement = document.getElementById("container");
+      const height = calculateDOMTreeHeight(htmlElement);
+      console.log(`The height of the DOM tree is ${height}`);
+    </script>
+  </body>
+</html>
