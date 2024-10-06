@@ -32,5 +32,114 @@
   <!-- <script src="./mergeObjects.js"></script> -->
   <!-- <script src="./deepcopy.js"></script> -->
   <!-- <script src="./arrayEventListener.js"></script> -->
-  <script src="./getSet.js"></script>
+  <!-- <script src="./getSet.js"></script> -->
+  <!-- <script src="./delay.js"></script> -->
+  <!-- <script src="./memoization.js"></script> -->
+  <!-- <script src="./fetchWithRetry.js"></script> -->
+  <!-- <script src="./pubSub.js"></script> -->
+  <!-- <script src="./objectCreatePolyfill.js"></script> -->
+  <!-- <script src="./deepCompareObject.js"></script> -->
+  <script src="./practice.js"></script>
 </html>
+
+<!-- Build a simple to-do list application using vanilla JavaScript.
+
+
+Title : textbox
+Descp : textbox
+
+Add todo button
+
+List todo:
+
+1) laundry: on sunday  : mark as done button
+2) movies: on monday  : mark as done button
+
+```js
+
+
+const titleElem = document.getElementById("title")
+const descElem = document.getElementById("desc")
+const listElem =document.getElementById("list")
+
+function markAsDone(id){
+console.log("called",id)
+const lielem = document.getElementById(id)
+lielem.style.background="red"
+
+}
+
+function addTodo(){
+const titleValue= titleElem.value
+const descValue= descElem.value
+const li = document.createElement("li")
+const span=document.createElement("span")
+const id = Date.now()
+li.id =id
+span.innerText =`${titleValue}:${descValue}`
+const button= document.createElement("button")
+button.innerText="Mark as done"
+button.onclick=()=>markAsDone(id)
+titleElem.value=""
+descElem.value=""
+li.appendChild(span)
+li.appendChild(button)
+listElem.appendChild(li)
+
+}
+
+```
+
+```html
+<h1>Todo app</h1>
+    <br />
+    <label>
+      <input id="title" />
+    </label>
+    <br />
+    <label>
+      <input id="desc" />
+    </label>
+    <br />
+    <button onclick="addTodo()">Add Todo</button>
+    <ul id="list">  </ul>
+```
+
+
+```js
+function curry(func) {
+  function curriedFunction(...args) {
+    if (func.length <= args.length) {
+      return func(...args)
+    } else {
+      return (...moreArgs) => {
+        return curriedFunction(...args, ...moreArgs)
+      }
+    }
+  }
+  return curriedFunction
+}
+
+function sum(a, b, c) {
+  return a + b + c
+}
+
+let curriedSum = curry(sum)
+console.log(curriedSum(1, 2, 3)) // Output: 6
+console.log(curriedSum(1)(2, 3)) // Output: 6
+console.log(curriedSum(1)(2)(3)) // Output: 6
+console.log(curriedSum(3)) // Output: [Function]
+
+
+```
+
+function sum(a,b,c){
+return a+b+c;
+}
+
+let curriedSum = curry(sum);
+console.log(curriedSum(1, 2, 3)); // Output: 6
+console.log(curriedSum(1)(2, 3)); // Output: 6
+console.log(curriedSum(1)(2)(3)); // Output: 6
+console.log(curriedSum(3)); // Output: [Function]
+ -->
